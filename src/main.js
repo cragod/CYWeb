@@ -1,9 +1,11 @@
-import Vue from 'vue'
-import App from './App.vue'
-import { Table, Tag, Divider } from "ant-design-vue"
+import Vue from 'vue';
+import App from './App';
+import Antd from 'ant-design-vue';
+import 'ant-design-vue/dist/antd.css';
 
-Vue.use(Table, Tag, Divider)
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
+
+Vue.use(Antd);
 
 new Vue({
   render: h => h(App),

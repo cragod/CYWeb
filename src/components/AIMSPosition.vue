@@ -1,87 +1,21 @@
 <template>
-  <a-table :columns="columns" :data-source="data">
-    <a slot="name" slot-scope="text">{{ text }}</a>
-    <span slot="tags" slot-scope="tags">
-      <a-tag
-        v-for="tag in tags"
-        :key="tag"
-        :color="
-          tag === 'loser' ? 'volcano' : tag.length > 5 ? 'geekblue' : 'green'
-        "
-      >
-        {{ tag.toUpperCase() }}
-      </a-tag>
-    </span>
-    <span slot="action" slot-scope="text, record">
-      <a>Invite 一 {{ record.name }}</a>
-      <a-divider type="vertical" />
-      <a>Delete</a>
-      <a-divider type="vertical" />
-      <a class="ant-dropdown-link"> More actions <a-icon type="down" /> </a>
-      <span>{{ testText }}</span>
-    </span>
+  <a-table
+    :loading="!hasData"
+    :columns="columns"
+    :data-source="resultData"
+    :pagination="false"
+    bordered
+  >
+    <template slot="title">AIMS 策略当前持仓信息</template>
+    <template slot="footer">
+      <a-row :style="{ fontWeight: 'bold' }">
+        Total cost:
+        <span :style="{ fontWeight: '400' }"> {{ totalCost }} </span>
+      </a-row>
+    </template>
   </a-table>
 </template>
 <script>
-const columns = [
-  {
-    dataIndex: "name",
-    key: "name",
-    slots: { title: "customTitle" },
-    scopedSlots: { customRender: "name" },
-  },
-  {
-    title: "Age",
-    dataIndex: "age",
-    key: "age",
-  },
-  {
-    title: "Address",
-    dataIndex: "address",
-    key: "address",
-  },
-  {
-    title: "Tags",
-    key: "tags",
-    dataIndex: "tags",
-    scopedSlots: { customRender: "tags" },
-  },
-  {
-    title: "Action",
-    key: "action",
-    scopedSlots: { customRender: "action" },
-  },
-  {
-    title: "Data",
-    key: "data",
-    dataIndex: "data",
-  },
-];
-
-var data = [
-  {
-    key: "1",
-    name: "John Brown",
-    customTitle: "hahahaha",
-    age: 32,
-    address: "New York No. 1 Lake Park",
-    tags: ["nice", "developer"],
-  },
-  {
-    key: "2",
-    name: "Jim Green",
-    age: 42,
-    address: "London No. 1 Lake Park",
-    tags: ["loser"],
-  },
-  {
-    key: "3",
-    name: "Joe Black",
-    age: 32,
-    address: "Sidney No. 1 Lake Park",
-    tags: ["cool", "teacher"],
-  },
-];
 import axios from "axios";
 const service = axios.create({
   baseURL: "/quant",
@@ -91,18 +25,69 @@ const service = axios.create({
 });
 export default {
   name: "AIMSPosition",
-  data() {
+  data: function () {
     return {
-      data,
-      columns,
+      resultData: [],
+      columns: [
+        {
+          title: "Exchange",
+          dataIndex: "exchange_name",
+          key: "exchangeName",
+        },
+        {
+          title: "CoinPair",
+          dataIndex: "coin_pair",
+          sorter: (a, b) => (a.coin_pair > b.coin_pair ? 1 : -1),
+          sortDirections: ["descend", "ascend"],
+          key: "coinPair",
+        },
+        {
+          title: "Cost",
+          dataIndex: "cost",
+          key: "cost",
+          sorter: (a, b) => a.cost - b.cost,
+        },
+        {
+          title: "Hold",
+          dataIndex: "hold",
+          key: "hold",
+        },
+        {
+          title: "Average",
+          dataIndex: "average_costing",
+          key: "average",
+        },
+      ],
     };
+  },
+  computed: {
+    hasData() {
+      return this.resultData.length > 0;
+    },
+    totalCost() {
+      if (!this.hasData) {
+        return 0;
+      }
+      return this.resultData.reduce(
+        (total, current) => total + current.cost,
+        0
+      );
+    },
   },
   mounted() {
     service.get("/api/aims_position").then((response) => {
-      this.data.forEach((element) => {
-        element["data"] = response.data;
+      var result = response.data["data"];
+      result.forEach((resultDict) => {
+        resultDict["key"] = Math.random();
       });
+      this.resultData = result;
     });
   },
+  methods: {},
 };
 </script>
+<style scoped>
+#abc {
+  font-weight: bold;
+}
+</style>
