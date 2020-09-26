@@ -1,6 +1,7 @@
 const proxy = require('http-proxy-middleware');
 
 module.exports = {
+    publicPath: './',
     devServer: {
         open: true,
         proxy: {  //配置跨域
