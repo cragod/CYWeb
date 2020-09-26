@@ -18,8 +18,9 @@
 <script>
 import axios from "axios";
 const service = axios.create({
-  baseURL: "/quant",
+  baseURL: "http://152.32.164.171:4041/quant/api",
   headers: {
+    "Access-Control-Allow-Origin": "*",
     "Content-Type": "application/json;",
   },
 });
@@ -75,7 +76,7 @@ export default {
     },
   },
   mounted() {
-    service.get("/api/aims_position").then((response) => {
+    service.get("/aims_position").then((response) => {
       var result = response.data["data"];
       result.forEach((resultDict) => {
         resultDict["key"] = Math.random();
