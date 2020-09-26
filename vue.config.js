@@ -1,4 +1,5 @@
 module.exports = {
+    assetsDir: "static",
     devServer: {
         open: true,
         proxy: {  //配置跨域
