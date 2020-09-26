@@ -1,5 +1,9 @@
 <template>
-  <AIMSPosition id="pos"></AIMSPosition>
+  <a-row type="flex" justify="center">
+    <a-col :span="8">
+      <AIMSPosition id="pos"></AIMSPosition>
+    </a-col>
+  </a-row>
 </template>
 
 <script>
@@ -15,5 +19,6 @@ export default {
 <style scoped>
 #pos {
   margin: 10px;
+  widows: 80%;
 }
 </style>
