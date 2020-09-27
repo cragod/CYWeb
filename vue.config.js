@@ -1,5 +1,9 @@
 module.exports = {
     assetsDir: "static",
+    chainWebpack: config => {
+        // 删除这个 preload 插件。
+        config.plugins.delete('preload');
+    },
     devServer: {
         open: true,
         proxy: {  //配置跨域
