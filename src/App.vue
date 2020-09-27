@@ -1,8 +1,6 @@
 <template>
   <a-row type="flex" justify="center">
-    <a-col :span="8">
-      <AIMSPosition id="pos"></AIMSPosition>
-    </a-col>
+    <AIMSPosition id="pos"></AIMSPosition>
   </a-row>
 </template>
 
@@ -12,6 +10,9 @@ export default {
   name: "App",
   components: {
     AIMSPosition,
+  },
+  created() {
+    document.title = "AIMS";
   },
 };
 </script>
