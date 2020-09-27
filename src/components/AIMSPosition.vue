@@ -18,7 +18,7 @@
 <script>
 import axios from "axios";
 const service = axios.create({
-  baseURL: "http://api.gatro.net/quant/api",
+  baseURL: "/quant/api",
   headers: {
     "Access-Control-Allow-Origin": "*",
     "Content-Type": "application/json;",
