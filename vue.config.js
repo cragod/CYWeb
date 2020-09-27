@@ -1,6 +1,6 @@
 module.exports = {
-    assetsDir: "static",
     publicPath: './',
+    css: { extract: false },
     chainWebpack: config => {
         // 删除这个 preload 插件。
         config.plugins.delete('preload');
