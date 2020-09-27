@@ -4,6 +4,7 @@
     :columns="columns"
     :data-source="resultData"
     :pagination="false"
+    :scroll="{ x: 800 }"
     bordered
   >
     <template slot="title">AIMS 策略当前持仓信息</template>
