@@ -1,11 +1,13 @@
 import Vue from 'vue';
 import App from './App';
-import Antd from 'ant-design-vue';
-import 'ant-design-vue/dist/antd.css';
-
+import {
+  Base,
+  Table,
+} from 'ant-design-vue';
 Vue.config.productionTip = false;
 
-Vue.use(Antd);
+Vue.use(Base);
+Vue.use(Table);
 
 new Vue({
   render: h => h(App),
