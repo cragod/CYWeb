@@ -15,6 +15,22 @@ Vue.use(Base);
 Vue.use(Table);
 Vue.use(Divider);
 
+Vue.mixin({
+  methods: {
+    isMobile() {
+      if (
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+          navigator.userAgent
+        )
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+  },
+})
+
 new Vue({
   render: h => h(App),
 }).$mount('#app')

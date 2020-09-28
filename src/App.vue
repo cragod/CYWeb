@@ -1,5 +1,7 @@
 <template>
-  <AIMSPosition id="pos"></AIMSPosition>
+  <a-row type="flex" justify="center">
+    <AIMSPosition id="pos"></AIMSPosition>
+  </a-row>
 </template>
 
 <script>
