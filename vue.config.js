@@ -59,8 +59,8 @@ module.exports = {
     devServer: {
         open: true,
         proxy: {  //配置跨域
-            '/quant': {
-                target: 'http://api.gatro.net',  //这里后台的地址模拟的;应该填写你们真实的后台接口
+            '/quant/api': {
+                target: 'http://127.0.0.1:800',  //这里后台的地址模拟的;应该填写你们真实的后台接口
                 changOrigin: true,  //允许跨域
             },
         }

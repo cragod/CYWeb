@@ -11,25 +11,24 @@
     <template slot="footer">
       <a-row :style="{ fontWeight: 'bold' }">
         Total cost:
-        <span :style="{ fontWeight: '400' }"> {{ totalCost }} </span>
+        <span :style="{ fontWeight: '400' }"> {{ totalCost }} USDT</span>
       </a-row>
+      <a-divider orientation="left"></a-divider>
+      <div v-for="(item, key) in balanceData" :key="key">
+        <span :style="{ fontWeight: 'bold' }">{{ key }} balance:</span>
+        <span> {{ item }} USDT</span>
+      </div>
     </template>
   </a-table>
 </template>
 <script>
 import axios from "axios";
-const service = axios.create({
-  baseURL: "/quant/api",
-  headers: {
-    "Access-Control-Allow-Origin": "*",
-    "Content-Type": "application/json;",
-  },
-});
 export default {
   name: "AIMSPosition",
   data: function () {
     return {
       resultData: [],
+      balanceData: [],
       columns: [
         {
           title: "Exchange",
@@ -55,9 +54,22 @@ export default {
           key: "hold",
         },
         {
-          title: "Average",
+          title: "Average Cost",
           dataIndex: "average_costing",
           key: "average",
+        },
+        {
+          title: "Current Price",
+          dataIndex: "current_price",
+          key: "current_price",
+        },
+        {
+          title: "Profit/Loss",
+          dataIndex: "profit",
+          key: "profit",
+          customRender: function (text, record) {
+            return Math.round(record.profit * 10000) / 100.0 + "%";
+          },
         },
       ],
     };
@@ -66,23 +78,31 @@ export default {
     hasData() {
       return this.resultData.length > 0;
     },
+    hasBalance() {
+      return this.balanceData.length > 0;
+    },
     totalCost() {
       if (!this.hasData) {
         return 0;
       }
       return this.resultData.reduce(
-        (total, current) => total + current.cost,
+        (total, current) => Math.round((total + current.cost) * 100) / 100,
         0
       );
     },
   },
   mounted() {
-    service.get("/aims_position").then((response) => {
+    axios.get("/aims_position").then((response) => {
       var result = response.data["data"];
       result.forEach((resultDict) => {
         resultDict["key"] = Math.random();
       });
       this.resultData = result;
+    });
+    axios.get("/aims_balance").then((response) => {
+      var result = response.data["data"];
+      console.log(result);
+      this.balanceData = result;
     });
   },
   methods: {},
