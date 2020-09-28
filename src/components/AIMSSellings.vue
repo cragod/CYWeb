@@ -73,8 +73,14 @@ export default {
           title: "Date",
           dataIndex: "date",
           width: 150,
-          customRender: (text) =>
-            new Date(Date.parse(text)).toLocaleDateString(),
+          customRender: function (text) {
+            console.log("hahaha", text);
+            if (text != null) {
+              return new Date(Date.parse(text)).toLocaleDateString();
+            } else {
+              return "/";
+            }
+          },
         },
       ],
     };
@@ -97,7 +103,15 @@ export default {
   },
   mounted() {
     axios.get("/aims_sellings").then((response) => {
-      this.resultData = response.data["data"];
+      var result = response.data["data"];
+      if (result != null) {
+        result.forEach((resultDict) => {
+          resultDict["key"] = Math.random();
+        });
+        this.resultData = result;
+      } else {
+        alert(response.data["msg"]);
+      }
     });
   },
   methods: {

@@ -79,6 +79,19 @@ export default {
             return Math.round(record.profit * 10000) / 100.0 + "%";
           },
         },
+        {
+          title: "Last buying",
+          dataIndex: "update_date",
+          width: 150,
+          customRender: function (text) {
+            console.log("hahaha", text);
+            if (text != null) {
+              return new Date(Date.parse(text)).toLocaleDateString();
+            } else {
+              return "/";
+            }
+          },
+        },
       ],
     };
   },
@@ -102,10 +115,14 @@ export default {
   mounted() {
     axios.get("/aims_position").then((response) => {
       var result = response.data["data"];
-      result.forEach((resultDict) => {
-        resultDict["key"] = Math.random();
-      });
-      this.resultData = result;
+      if (result != null) {
+        result.forEach((resultDict) => {
+          resultDict["key"] = Math.random();
+        });
+        this.resultData = result;
+      } else {
+        alert(response.data["msg"]);
+      }
     });
     axios.get("/aims_balance").then((response) => {
       var result = response.data["data"];
