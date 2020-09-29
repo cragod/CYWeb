@@ -25,13 +25,13 @@ export default {
           title: "日期",
           dataIndex: "date",
           fixed: this.isMobile(),
-          width: this.isMobile() ? 110 : 150,
+          width: this.isMobile() ? 120 : 150,
           customRender: this.formatISO8081Date,
         },
         {
           title: "花费",
           dataIndex: "cost",
-          width: 100,
+          width: 120,
           customRender: (text) => this.roundedFloat(text, 1e2),
         },
         {
@@ -43,7 +43,7 @@ export default {
         {
           title: "价格",
           dataIndex: "price",
-          width: 125,
+          width: 140,
           customRender: (text) => this.roundedFloat(text, 1e6),
         },
         {
@@ -59,9 +59,15 @@ export default {
           customRender: (text) => this.roundedFloat(text, 1e6),
         },
         {
+          title: "平均成本",
+          dataIndex: "position",
+          width: 140,
+          customRender: (text) => this.roundedFloat(text, 1e6),
+        },
+        {
           title: "天数",
           dataIndex: "days",
-          width: 60,
+          width: 80,
           align: "center",
         },
       ],

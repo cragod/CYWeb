@@ -45,7 +45,7 @@ export default {
           dataIndex: "cost",
           key: "cost",
           sorter: (a, b) => a.cost - b.cost,
-          width: 100,
+          width: 120,
           customRender: (text, record) => this.roundedFloat(record.cost, 1e6),
         },
         {
@@ -58,7 +58,7 @@ export default {
         {
           title: "Close Price",
           dataIndex: "close_price",
-          width: 100,
+          width: 140,
           customRender: (text, record) =>
             this.roundedFloat(record.close_price, 1e6),
         },
