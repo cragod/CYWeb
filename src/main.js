@@ -41,7 +41,7 @@ Vue.mixin({
     },
     formatISO8081Date(text) {
       if (text != null) {
-        return new Date(Date.parse(text)).toLocaleDateString('zh-Hans-CN');
+        return new Date(Date.parse(text)).toLocaleDateString('zh-Hans-CN', { year: "numeric", month: "2-digit", day: "2-digit" });
       } else {
         return "/";
       }
