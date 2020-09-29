@@ -74,7 +74,6 @@ export default {
           dataIndex: "date",
           width: 150,
           customRender: function (text) {
-            console.log("hahaha", text);
             if (text != null) {
               return new Date(Date.parse(text)).toLocaleDateString();
             } else {
@@ -101,7 +100,7 @@ export default {
       );
     },
   },
-  mounted() {
+  created() {
     axios.get("/aims_sellings").then((response) => {
       var result = response.data["data"];
       if (result != null) {
@@ -113,11 +112,6 @@ export default {
         alert(response.data["msg"]);
       }
     });
-  },
-  methods: {
-    roundedFloat: function (value, digits = 100) {
-      return Math.round(value * digits) / digits;
-    },
   },
 };
 </script>

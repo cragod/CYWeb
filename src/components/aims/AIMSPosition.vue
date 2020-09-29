@@ -84,7 +84,6 @@ export default {
           dataIndex: "update_date",
           width: 150,
           customRender: function (text) {
-            console.log("hahaha", text);
             if (text != null) {
               return new Date(Date.parse(text)).toLocaleDateString();
             } else {
@@ -112,7 +111,7 @@ export default {
       );
     },
   },
-  mounted() {
+  created() {
     axios.get("/aims_position").then((response) => {
       var result = response.data["data"];
       if (result != null) {
@@ -126,7 +125,6 @@ export default {
     });
     axios.get("/aims_balance").then((response) => {
       var result = response.data["data"];
-      console.log(result);
       this.balanceData = result;
     });
   },

@@ -5,6 +5,10 @@ import {
   Base,
   Table,
   Divider,
+  Layout,
+  Menu,
+  Cascader,
+  Spin,
 } from 'ant-design-vue';
 Vue.config.productionTip = false;
 
@@ -14,6 +18,10 @@ axios.defaults.headers.common['Content-Type'] = "application/json";
 Vue.use(Base);
 Vue.use(Table);
 Vue.use(Divider);
+Vue.use(Layout);
+Vue.use(Menu);
+Vue.use(Cascader);
+Vue.use(Spin);
 
 Vue.mixin({
   methods: {
@@ -27,6 +35,9 @@ Vue.mixin({
       } else {
         return false;
       }
+    },
+    roundedFloat: function (value, digits = 100) {
+      return Math.round(value * digits) / digits;
     },
   },
 })
