@@ -4,10 +4,10 @@
     :columns="columns"
     :data-source="records"
     :pagination="false"
-    :scroll="{ x: 800 }"
+    :scroll="{ x: 600 }"
     bordered
   >
-    <template slot="title">{{ exchange }} - {{ coin_pair }} 定投记录</template>
+    <template slot="title">定投记录</template>
   </a-table>
 </template>
 
@@ -25,49 +25,44 @@ export default {
           title: "日期",
           dataIndex: "date",
           fixed: this.isMobile(),
-          width: this.isMobile() ? 120 : 150,
-          customRender: function (text) {
-            if (text != null) {
-              return new Date(Date.parse(text)).toLocaleDateString();
-            } else {
-              return "/";
-            }
-          },
+          width: this.isMobile() ? 110 : 150,
+          customRender: this.formatISO8081Date,
         },
         {
           title: "花费",
           dataIndex: "cost",
-          width: 150,
-          customRender: (text) => this.roundedFloat(text, 1e6),
+          width: 100,
+          customRender: (text) => this.roundedFloat(text, 1e2),
         },
         {
           title: "数量",
           dataIndex: "amount",
-          width: 150,
+          width: 120,
           customRender: (text) => this.roundedFloat(text, 1e6),
         },
         {
           title: "价格",
           dataIndex: "price",
-          width: 150,
+          width: 125,
           customRender: (text) => this.roundedFloat(text, 1e6),
         },
         {
-          title: "总花费(截止当天)",
+          title: "总花费",
           dataIndex: "total_cost",
-          width: 150,
-          customRender: (text) => this.roundedFloat(text, 1e6),
+          width: 90,
+          customRender: (text) => this.roundedFloat(text, 1e2),
         },
         {
-          title: "总数量(截止当天)",
+          title: "总数量",
           dataIndex: "total_hold",
-          width: 150,
+          width: 115,
           customRender: (text) => this.roundedFloat(text, 1e6),
         },
         {
           title: "天数",
           dataIndex: "days",
-          width: 150,
+          width: 60,
+          align: "center",
         },
       ],
       records: [],

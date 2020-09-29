@@ -4,7 +4,7 @@
     :columns="columns"
     :data-source="resultData"
     :pagination="false"
-    :scroll="{ x: 800 }"
+    :scroll="{ x: 600 }"
     bordered
   >
     <template slot="title">AIMS 策略当前持仓信息</template>
@@ -37,59 +37,54 @@ export default {
           sortDirections: ["descend", "ascend"],
           key: "coinPair",
           fixed: this.isMobile(),
-          width: 150,
+          width: this.isMobile() ? 115 : 150,
         },
         {
           title: "Exchange",
           dataIndex: "exchange_name",
           key: "exchangeName",
-          width: 150,
+          width: 100,
         },
         {
           title: "Cost",
           dataIndex: "cost",
           key: "cost",
           sorter: (a, b) => a.cost - b.cost,
-          width: 150,
+          width: 100,
         },
         {
           title: "Hold",
           dataIndex: "hold",
           key: "hold",
-          width: 150,
+          width: 120,
         },
         {
           title: "Average Cost",
           dataIndex: "average_costing",
           key: "average",
-          width: 150,
+          width: 100,
         },
         {
           title: "Current Price",
           dataIndex: "current_price",
           key: "current_price",
-          width: 150,
+          width: 100,
         },
         {
           title: "Profit/Loss",
           dataIndex: "profit",
           key: "profit",
-          width: 150,
+          width: 105,
           customRender: function (text, record) {
             return Math.round(record.profit * 10000) / 100.0 + "%";
           },
+          align: "center",
         },
         {
           title: "Last buying",
           dataIndex: "update_date",
-          width: 150,
-          customRender: function (text) {
-            if (text != null) {
-              return new Date(Date.parse(text)).toLocaleDateString();
-            } else {
-              return "/";
-            }
-          },
+          width: 120,
+          customRender: this.formatISO8081Date,
         },
       ],
     };

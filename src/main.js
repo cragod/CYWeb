@@ -39,6 +39,13 @@ Vue.mixin({
     roundedFloat: function (value, digits = 100) {
       return Math.round(value * digits) / digits;
     },
+    formatISO8081Date(text) {
+      if (text != null) {
+        return new Date(Date.parse(text)).toLocaleDateString('zh-Hans-CN');
+      } else {
+        return "/";
+      }
+    },
   },
 })
 

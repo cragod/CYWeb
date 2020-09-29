@@ -18,6 +18,7 @@
       :key="exchange + coin_pair"
       :exchange="exchange"
       :coin_pair="coin_pair"
+      :style="{ padding: '10px 0px' }"
     />
   </div>
 </template>

@@ -13,7 +13,7 @@
         <a-menu-item key="aims"> AIMS </a-menu-item>
       </a-menu>
     </a-layout-header>
-    <a-layout-content :style="{ padding: '0 10px', marginTop: '64px' }">
+    <a-layout-content :style="{ marginTop: '64px', background: white }">
       <keep-alive>
         <div v-if="selectedMenuKey == 'aims'" class="content">
           <AIMS />
@@ -53,15 +53,15 @@ export default {
 
 <style scoped>
 .content {
-  background: "#fff";
-
+  padding: 0px 5px;
   min-height: "380px";
+  background: white;
 }
 #components-layout-demo-fixed .logo {
   width: 120px;
   height: 31px;
-  background: rgba(255, 255, 255, 0.2);
   margin: 16px 24px 16px 0;
+  background: white;
   float: left;
 }
 </style>
