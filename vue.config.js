@@ -6,8 +6,10 @@ module.exports = {
     publicPath: './',
     css: { extract: false },
     chainWebpack: config => {
-        // 删除这个 preload 插件。
-        config.plugins.delete('preload');
+        config.plugin('html').tap(args => {
+            args[0].title = 'Gatro Quant'
+            return args
+        });
     },
     // 配置webpack
     configureWebpack: config => {
