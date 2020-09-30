@@ -10,12 +10,12 @@
     <template slot="title">AIMS 策略当前持仓信息</template>
     <template slot="footer">
       <a-row :style="{ fontWeight: 'bold' }">
-        Total cost:
+        当前总成本:
         <span :style="{ fontWeight: '400' }"> {{ totalCost }} USDT</span>
       </a-row>
       <a-divider orientation="left"></a-divider>
       <div v-for="(item, key) in balanceData" :key="key">
-        <span :style="{ fontWeight: 'bold' }">{{ key }} balance:</span>
+        <span :style="{ fontWeight: 'bold' }">{{ key }} 余额:</span>
         <span> {{ Math.round(item * 100) / 100 }} USDT</span>
       </div>
     </template>
@@ -31,7 +31,7 @@ export default {
       balanceData: [],
       columns: [
         {
-          title: "CoinPair",
+          title: "币对",
           dataIndex: "coin_pair",
           sorter: (a, b) => (a.coin_pair > b.coin_pair ? 1 : -1),
           sortDirections: ["descend", "ascend"],
@@ -40,13 +40,13 @@ export default {
           width: this.isMobile() ? 115 : 150,
         },
         {
-          title: "Exchange",
+          title: "交易所",
           dataIndex: "exchange_name",
           key: "exchangeName",
           width: 100,
         },
         {
-          title: "Cost",
+          title: "成本",
           dataIndex: "cost",
           key: "cost",
           sorter: (a, b) => a.cost - b.cost,
@@ -54,27 +54,27 @@ export default {
           customRender: (text) => this.roundedFloat(text, 1e6),
         },
         {
-          title: "Hold",
+          title: "持仓",
           dataIndex: "hold",
           key: "hold",
           width: 120,
           customRender: (text) => this.roundedFloat(text),
         },
         {
-          title: "Average Price",
+          title: "均价",
           dataIndex: "average_costing",
           key: "average",
           width: 140,
           customRender: (text) => this.roundedFloat(text, 1e6),
         },
         {
-          title: "Current Price",
+          title: "当前价",
           dataIndex: "current_price",
           key: "current_price",
           width: 120,
         },
         {
-          title: "Profit/Loss",
+          title: "浮盈",
           dataIndex: "profit",
           key: "profit",
           width: 105,
@@ -87,7 +87,7 @@ export default {
           align: "center",
         },
         {
-          title: "Last buying",
+          title: "最后买入",
           dataIndex: "update_date",
           width: 120,
           customRender: this.formatISO8081Date,

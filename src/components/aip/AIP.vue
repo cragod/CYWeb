@@ -7,6 +7,7 @@
         :allowClear="false"
         :defaultValue="defaultValue"
         :key="menuKey"
+        :style="{ position: 'fixed', zIndex: 1 }"
         expandTrigger="hover"
         placeholder="选择币种"
         @change="onChange"
@@ -18,7 +19,7 @@
       :key="exchange + coin_pair"
       :exchange="exchange"
       :coin_pair="coin_pair"
-      :style="{ padding: '10px 0px' }"
+      :style="{ padding: '40px 0px' }"
     />
   </div>
 </template>

@@ -4,20 +4,20 @@
     :columns="columns"
     :data-source="records"
     :pagination="false"
-    :scroll="{ x: 600 }"
+    :scroll="{ x: 600, y: isMobile() ? 500 : 800 }"
     bordered
   >
     <template slot="title">定投记录</template>
     <template slot="footer">
       <a-row :style="{ fontWeight: 'bold' }">
-        Current Price:
-        <span :style="{ fontWeight: '400' }"> {{ current_price }} </span>
+        当前价格:
+        <span :style="{ fontWeight: '400' }"> {{ current_price }} USDT </span>
       </a-row>
       <a-divider orientation="left"></a-divider>
       <a-row :style="{ fontWeight: 'bold' }">
-        Profit/Loss:
+        浮盈:
         <span :style="{ fontWeight: '400' }">
-          {{ roundedFloat(profit) }}({{
+          {{ roundedFloat(profit) }} USDT ({{
             Math.round(profit_ratio * 10000) / 100
           }}%)
         </span>
@@ -47,13 +47,13 @@ export default {
           customRender: this.formatISO8081Date,
         },
         {
-          title: "花费",
+          title: "成本",
           dataIndex: "cost",
-          width: 120,
+          width: 80,
           customRender: (text) => this.roundedFloat(text, 1e2),
         },
         {
-          title: "数量",
+          title: "买入量",
           dataIndex: "amount",
           width: 120,
           customRender: (text) => this.roundedFloat(text, 1e6),
@@ -65,19 +65,19 @@ export default {
           customRender: (text) => this.roundedFloat(text, 1e6),
         },
         {
-          title: "总花费",
+          title: "总成本",
           dataIndex: "total_cost",
-          width: 90,
+          width: 110,
           customRender: (text) => this.roundedFloat(text, 1e2),
         },
         {
-          title: "总数量",
+          title: "总持仓",
           dataIndex: "total_hold",
           width: 115,
           customRender: (text) => this.roundedFloat(text, 1e6),
         },
         {
-          title: "平均成本",
+          title: "平均价格",
           dataIndex: "position",
           width: 140,
           customRender: (text) => this.roundedFloat(text, 1e6),

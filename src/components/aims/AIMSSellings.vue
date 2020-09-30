@@ -10,7 +10,7 @@
     <template slot="title">AIMS 策略历史卖出记录</template>
     <template slot="footer">
       <a-row :style="{ fontWeight: 'bold' }">
-        Total profit:
+        历史盈利:
         <span :style="{ fontWeight: '400' }"> {{ totalProfit }} USDT</span>
       </a-row>
     </template>
@@ -26,7 +26,7 @@ export default {
       resultData: [],
       columns: [
         {
-          title: "CoinPair",
+          title: "币对",
           dataIndex: "coin_pair",
           sorter: (a, b) => (a.coin_pair > b.coin_pair ? 1 : -1),
           sortDirections: ["descend", "ascend"],
@@ -35,13 +35,13 @@ export default {
           width: this.isMobile() ? 115 : 150,
         },
         {
-          title: "Exchange",
+          title: "交易所",
           dataIndex: "exchange_name",
           key: "exchangeName",
           width: 100,
         },
         {
-          title: "Cost",
+          title: "成本",
           dataIndex: "cost",
           key: "cost",
           sorter: (a, b) => a.cost - b.cost,
@@ -49,23 +49,31 @@ export default {
           customRender: (text, record) => this.roundedFloat(record.cost, 1e6),
         },
         {
-          title: "Hold",
+          title: "持仓",
           dataIndex: "hold",
           key: "hold",
           width: 120,
           customRender: (text, record) => this.roundedFloat(record.hold, 1e6),
         },
         {
-          title: "Close Price",
+          title: "均价",
+          dataIndex: "hold",
+          key: "average",
+          width: 120,
+          customRender: (text, record) =>
+            this.roundedFloat(record.cost / record.hold, 1e6),
+        },
+        {
+          title: "平仓价格",
           dataIndex: "close_price",
           width: 140,
           customRender: (text, record) =>
             this.roundedFloat(record.close_price, 1e6),
         },
         {
-          title: "Profit",
+          title: "盈利",
           dataIndex: "profit_amount",
-          width: 100,
+          width: 130,
           customRender: (text, record) =>
             this.roundedFloat(record.profit_amount) +
             " (" +
@@ -76,7 +84,7 @@ export default {
             "%)",
         },
         {
-          title: "Date",
+          title: "日期",
           dataIndex: "date",
           width: 120,
           customRender: this.formatISO8081Date,
