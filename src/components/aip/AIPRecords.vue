@@ -8,6 +8,21 @@
     bordered
   >
     <template slot="title">定投记录</template>
+    <template slot="footer">
+      <a-row :style="{ fontWeight: 'bold' }">
+        Current Price:
+        <span :style="{ fontWeight: '400' }"> {{ current_price }} </span>
+      </a-row>
+      <a-divider orientation="left"></a-divider>
+      <a-row :style="{ fontWeight: 'bold' }">
+        Profit/Loss:
+        <span :style="{ fontWeight: '400' }">
+          {{ roundedFloat(profit) }}({{
+            Math.round(profit_ratio * 10000) / 100
+          }}%)
+        </span>
+      </a-row>
+    </template>
   </a-table>
 </template>
 
@@ -20,6 +35,9 @@ export default {
   },
   data() {
     return {
+      current_price: 0,
+      profit: 0,
+      profit_ratio: 0,
       columns: [
         {
           title: "日期",
@@ -88,7 +106,15 @@ export default {
         },
       })
       .then((resp) => {
-        this.records = resp.data["data"];
+        var resultData = resp.data["data"];
+        if (resultData != null) {
+          this.records = resultData["list"];
+          this.current_price = resultData["current_price"];
+          this.profit = resultData["profit"];
+          this.profit_ratio = resultData["profit_ratio"];
+        } else {
+          alert("request failed");
+        }
       });
   },
 };

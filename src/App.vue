@@ -1,5 +1,5 @@
 <template>
-  <a-layout id="components-layout-demo-fixed">
+  <a-layout id="root-layout">
     <a-layout-header :style="{ position: 'fixed', zIndex: 1, width: '100%' }">
       <!-- <div class="logo" /> -->
       <a-menu
@@ -57,11 +57,6 @@ export default {
   min-height: "380px";
   background: white;
 }
-#components-layout-demo-fixed .logo {
-  width: 120px;
-  height: 31px;
-  margin: 16px 24px 16px 0;
-  background: white;
-  float: left;
+#root-layout {
 }
 </style>

@@ -67,7 +67,13 @@ export default {
           dataIndex: "profit_amount",
           width: 100,
           customRender: (text, record) =>
-            this.roundedFloat(record.profit_amount),
+            this.roundedFloat(record.profit_amount) +
+            " (" +
+            Math.round(
+              (((record.close_price / record.cost) * record.hold - 1) * 10000) /
+                100
+            ) +
+            "%)",
         },
         {
           title: "Date",

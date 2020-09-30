@@ -79,6 +79,9 @@ export default {
           key: "profit",
           width: 105,
           customRender: function (text, record) {
+            if (record.hold == 0) {
+              return "/";
+            }
             return Math.round(record.profit * 10000) / 100.0 + "%";
           },
           align: "center",
