@@ -84,7 +84,6 @@ export default {
             }
             return Math.round(record.profit * 10000) / 100.0 + "%";
           },
-          align: "center",
         },
         {
           title: "最后买入",
