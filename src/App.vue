@@ -1,5 +1,5 @@
 <template>
-  <a-layout id="root-layout">
+  <a-layout>
     <a-layout-header :style="{ position: 'fixed', zIndex: 1, width: '100%' }">
       <!-- <div class="logo" /> -->
       <a-menu
@@ -56,7 +56,5 @@ export default {
   padding: 0px 5px;
   min-height: "380px";
   background: white;
-}
-#root-layout {
 }
 </style>
