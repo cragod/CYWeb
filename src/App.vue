@@ -9,8 +9,8 @@
         :style="{ lineHeight: '64px' }"
         @select="selected"
       >
-        <a-menu-item key="aip"> 定投记录 </a-menu-item>
         <a-menu-item key="aims"> AIMS 策略 </a-menu-item>
+        <a-menu-item key="aip"> 定投记录 </a-menu-item>
       </a-menu>
     </a-layout-header>
     <a-layout-content :style="{ marginTop: '64px', background: white }">
@@ -37,7 +37,7 @@ export default {
   },
   data() {
     return {
-      selectedMenuKey: "aip",
+      selectedMenuKey: "aims",
     };
   },
   created() {
