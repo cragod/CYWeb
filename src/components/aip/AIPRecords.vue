@@ -22,6 +22,7 @@
           }}%)
         </span>
       </a-row>
+      <a-divider orientation="left"></a-divider>
       <a-row :style="{ fontWeight: 'bold' }">
         总价值:
         <span :style="{ fontWeight: '400' }">
