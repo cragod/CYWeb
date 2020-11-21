@@ -22,6 +22,12 @@
           }}%)
         </span>
       </a-row>
+      <a-row :style="{ fontWeight: 'bold' }">
+        总价值:
+        <span :style="{ fontWeight: '400' }">
+          {{ roundedFloat(total_value) }} USDT
+        </span>
+      </a-row>
     </template>
   </a-table>
 </template>
@@ -38,6 +44,7 @@ export default {
       current_price: 0,
       profit: 0,
       profit_ratio: 0,
+      total_value: 0,
       columns: [
         {
           title: "日期",
@@ -112,6 +119,7 @@ export default {
           this.current_price = resultData["current_price"];
           this.profit = resultData["profit"];
           this.profit_ratio = resultData["profit_ratio"];
+          this.total_value = resultData["total_worth"];
         } else {
           alert("request failed");
         }
