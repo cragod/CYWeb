@@ -1,16 +1,25 @@
 <template>
   <a-table
-    :loading="!hasData"
+    :loading="showLoading"
     :columns="columns"
     :data-source="resultData"
     :pagination="false"
     :scroll="{ x: 600 }"
     bordered
   >
-    <template slot="title">AIMS 策略历史卖出记录</template>
+    <template slot="title"
+      >AIMS 策略历史卖出记录(
+      <a-range-picker
+        :size="'small'"
+        :defaultValue="dates"
+        :allowClear="false"
+        @change="dateOnChange"
+      ></a-range-picker>
+      )
+    </template>
     <template slot="footer">
       <a-row :style="{ fontWeight: 'bold' }">
-        历史盈利:
+        期间盈利:
         <span :style="{ fontWeight: '400' }"> {{ totalProfit }} USDT</span>
       </a-row>
     </template>
@@ -19,10 +28,13 @@
 
 <script>
 import axios from "axios";
+import moment from "moment";
 export default {
   name: "AIMSSellings",
   data() {
     return {
+      loading: false,
+      dates: [moment("2020-11-26", "YYYY-MM-DD"), moment()],
       resultData: [],
       columns: [
         {
@@ -93,6 +105,9 @@ export default {
     };
   },
   computed: {
+    showLoading() {
+      return this.loading;
+    },
     hasData() {
       return this.resultData.length > 0;
     },
@@ -108,18 +123,33 @@ export default {
       );
     },
   },
-  created() {
-    axios.get("/aims_sellings").then((response) => {
-      var result = response.data["data"];
-      if (result != null) {
-        result.forEach((resultDict) => {
-          resultDict["key"] = Math.random();
+  methods: {
+    dateOnChange: function (dates) {
+      this.dates = dates;
+      this.fetchRecords();
+    },
+    fetchRecords: function () {
+      this.loading = true;
+      let begin = this.dates[0].valueOf();
+      let end = this.dates[1].valueOf();
+      axios
+        .get("/aims_sellings?begin=" + begin + "&end=" + end)
+        .then((response) => {
+          this.loading = false;
+          var result = response.data["data"];
+          if (result != null) {
+            result.forEach((resultDict) => {
+              resultDict["key"] = Math.random();
+            });
+            this.resultData = result;
+          } else {
+            alert(response.data["msg"]);
+          }
         });
-        this.resultData = result;
-      } else {
-        alert(response.data["msg"]);
-      }
-    });
+    },
+  },
+  mounted() {
+    this.fetchRecords();
   },
 };
 </script>

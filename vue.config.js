@@ -62,8 +62,8 @@ module.exports = {
         open: true,
         proxy: {
             '/quant/api': {
-                target: 'http://api.gatro.net',
-                // target: 'http://0.0.0.0:800',
+                // target: 'http://api.gatro.net',
+                target: 'http://0.0.0.0:800',
                 changOrigin: true,  //允许跨域
             },
         }

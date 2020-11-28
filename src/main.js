@@ -9,7 +9,9 @@ import {
   Menu,
   Cascader,
   Spin,
+  DatePicker,
 } from 'ant-design-vue';
+
 Vue.config.productionTip = false;
 
 axios.defaults.baseURL = '/quant/api';
@@ -22,6 +24,7 @@ Vue.use(Layout);
 Vue.use(Menu);
 Vue.use(Cascader);
 Vue.use(Spin);
+Vue.use(DatePicker);
 
 Vue.mixin({
   methods: {
