@@ -4,12 +4,19 @@
     :columns="columns"
     :data-source="resultData"
     :pagination="false"
-    :scroll="{ x: 600 }"
+    :scroll="{ x: 600, y: isMobile() ? 500 : 700 }"
     bordered
   >
     <template slot="title"
       >AIMS 策略历史卖出记录(
       <a-range-picker
+        :ranges="{
+          策略开始至今: [moment('2020-8-20', 'YYYY-MM-DD'), moment()],
+          大家上车至今: [moment('2020-11-26', 'YYYY-MM-DD'), moment()],
+          过去7天: [moment().subtract(7, 'days'), moment()],
+          过去30天: [moment().subtract(30, 'days'), moment()],
+          过去90天: [moment().subtract(90, 'days'), moment()],
+        }"
         :size="'small'"
         :defaultValue="dates"
         :allowClear="false"

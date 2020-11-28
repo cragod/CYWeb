@@ -10,7 +10,12 @@ import {
   Cascader,
   Spin,
   DatePicker,
+  ConfigProvider,
+
 } from 'ant-design-vue';
+import moment from "moment";
+import 'moment/locale/zh-cn';
+moment.locale('zh-cn');
 
 Vue.config.productionTip = false;
 
@@ -25,9 +30,11 @@ Vue.use(Menu);
 Vue.use(Cascader);
 Vue.use(Spin);
 Vue.use(DatePicker);
+Vue.use(ConfigProvider);
 
 Vue.mixin({
   methods: {
+    moment,
     isMobile() {
       if (
         /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
