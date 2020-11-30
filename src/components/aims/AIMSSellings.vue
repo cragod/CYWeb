@@ -11,11 +11,17 @@
       >AIMS 策略历史卖出记录(
       <a-range-picker
         :ranges="{
-          策略开始至今: [moment('2020-8-20', 'YYYY-MM-DD'), moment()],
-          大家上车至今: [moment('2020-11-26', 'YYYY-MM-DD'), moment()],
-          过去7天: [moment().subtract(7, 'days'), moment()],
-          过去30天: [moment().subtract(30, 'days'), moment()],
-          过去90天: [moment().subtract(90, 'days'), moment()],
+          策略开始至今: [
+            moment('2020-8-20', 'YYYY-MM-DD'),
+            moment().add(1, 'days'),
+          ],
+          大家上车至今: [
+            moment('2020-11-26', 'YYYY-MM-DD'),
+            moment().add(1, 'days'),
+          ],
+          过去7天: [moment().subtract(7, 'days'), moment().add(1, 'days')],
+          过去30天: [moment().subtract(30, 'days'), moment().add(1, 'days')],
+          过去90天: [moment().subtract(90, 'days'), moment().add(1, 'days')],
         }"
         :size="'small'"
         :defaultValue="dates"
@@ -41,7 +47,7 @@ export default {
   data() {
     return {
       loading: false,
-      dates: [moment("2020-11-26", "YYYY-MM-DD"), moment()],
+      dates: [moment("2020-11-26", "YYYY-MM-DD"), moment().add(1, "days")],
       resultData: [],
       columns: [
         {
