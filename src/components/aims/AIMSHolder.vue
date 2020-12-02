@@ -1,25 +1,41 @@
 <template>
-  <a-table
-    :loading="showLoading"
-    :columns="columns"
-    :data-source="resultData"
-    :pagination="false"
-    :scroll="{ x: 600, y: isMobile() ? 500 : 700 }"
-    bordered
-  >
-    <template slot="title"> 乘客信息 </template>
-    <template slot="footer"> </template>
-  </a-table>
+  <div>
+    <a-table
+      :loading="showLoading"
+      :columns="columns"
+      :data-source="resultData"
+      :pagination="false"
+      :scroll="{ x: 600, y: isMobile() ? 500 : 700 }"
+      bordered
+      :customRow="customRow"
+    >
+      <template slot="title"> 乘客信息 </template>
+      <template slot="footer"> </template>
+    </a-table>
+    <RecordsView
+      :showRecords="showRecords"
+      :name="holderName"
+      :holderID="holderID"
+      @dismissModal="dismissModal"
+    ></RecordsView>
+  </div>
 </template>
 
 <script>
 import axios from "axios";
+import RecordsView from "./sub/RecordsView";
 export default {
   name: "AIMSHolder",
+  components: {
+    RecordsView,
+  },
   data() {
     return {
       loading: false,
       resultData: [],
+      showRecords: false,
+      holderName: "",
+      holderID: -1,
       columns: [
         {
           title: "昵称",
@@ -91,6 +107,21 @@ export default {
           alert(response.data["msg"]);
         }
       });
+    },
+    customRow: function (record) {
+      return {
+        on: {
+          click: (event) => {
+            console.log(event, record);
+            this.holderID = record["_id"];
+            this.holderName = record["name"];
+            this.showRecords = true;
+          },
+        },
+      };
+    },
+    dismissModal: function () {
+      this.showRecords = false;
     },
   },
   mounted() {

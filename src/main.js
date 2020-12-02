@@ -11,7 +11,8 @@ import {
   Spin,
   DatePicker,
   ConfigProvider,
-
+  Modal,
+  Timeline,
 } from 'ant-design-vue';
 import moment from "moment";
 import 'moment/locale/zh-cn';
@@ -31,6 +32,8 @@ Vue.use(Cascader);
 Vue.use(Spin);
 Vue.use(DatePicker);
 Vue.use(ConfigProvider);
+Vue.use(Modal);
+Vue.use(Timeline);
 
 Vue.mixin({
   methods: {
