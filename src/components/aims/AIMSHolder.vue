@@ -53,6 +53,7 @@ export default {
           sortDirections: ["descend", "ascend"],
           key: "balance",
           width: 100,
+          customRender: (text) => this.roundedFloat(text, 1e2),
         },
         {
           title: "资金占比",
