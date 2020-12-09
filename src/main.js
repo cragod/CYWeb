@@ -13,6 +13,7 @@ import {
   ConfigProvider,
   Modal,
   Timeline,
+  Button,
 } from 'ant-design-vue';
 import moment from "moment";
 import 'moment/locale/zh-cn';
@@ -34,6 +35,7 @@ Vue.use(DatePicker);
 Vue.use(ConfigProvider);
 Vue.use(Modal);
 Vue.use(Timeline);
+Vue.use(Button);
 
 Vue.mixin({
   methods: {
