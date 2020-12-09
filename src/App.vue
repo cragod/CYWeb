@@ -7,7 +7,7 @@
       <a-menu
         theme="dark"
         mode="horizontal"
-        :selectedKeys="[this.$route.path]"
+        :selectedKeys="selectedKeys"
         :style="{ lineHeight: '64px' }"
         @select="selected"
       >
@@ -28,19 +28,19 @@
 <script>
 export default {
   name: "App",
-  data() {
-    return {
-      selectedMenuKey: "/aims",
-    };
-  },
   created() {
-    document.title = "Gatro Quant";
+    document.title = "CY Quant";
   },
-  methods: {
-    selected: function (item) {
-      this.selectedMenuKey = item.key;
+  computed: {
+    selectedKeys: function () {
+      // 给默认的映射到选中 aims
+      if (this.$route.path == "/") {
+        return ["/aims"];
+      }
+      return [this.$route.path];
     },
   },
+  methods: {},
 };
 </script>
 
