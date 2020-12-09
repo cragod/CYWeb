@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import App from './App';
 import axios from 'axios';
+import VueRouter from 'vue-router'
 import {
   Base,
   Table,
@@ -25,6 +26,8 @@ axios.defaults.baseURL = '/quant/api';
 axios.defaults.headers.common['Content-Type'] = "application/json";
 
 Vue.use(Base);
+Vue.use(VueRouter);
+
 Vue.use(Table);
 Vue.use(Divider);
 Vue.use(Layout);
