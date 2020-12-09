@@ -30,7 +30,7 @@ export default {
   name: "App",
   data() {
     return {
-      selectedMenuKey: this.$route.path,
+      selectedMenuKey: "/aims",
     };
   },
   created() {
