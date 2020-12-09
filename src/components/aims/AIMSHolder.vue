@@ -123,7 +123,7 @@ export default {
     customRow: function (record) {
       return {
         on: {
-          click: (event) => {
+          click: () => {
             this.holderID = record["_id"];
             this.holderName = record["name"];
             this.showRecords = true;
