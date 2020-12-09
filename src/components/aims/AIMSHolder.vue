@@ -9,10 +9,12 @@
       bordered
       :customRow="customRow"
     >
-      <template slot="title"> 
-        <div class='title'>
+      <template slot="title">
+        <div class="title">
           <span> 乘客信息 </span>
-          <a-button :style="{fontWeight: '500'}" type="link" @click="toShowEvents"> 资金日志 </a-button>
+          <a-button :style="{ fontWeight: '500' }" type="link" @click="toShowEvents">
+            资金日志
+          </a-button>
         </div>
       </template>
       <template slot="footer"> </template>
@@ -23,17 +25,14 @@
       :holderID="holderID"
       @dismissModal="dismissRecords"
     ></RecordsView>
-    <EventsView
-      :showRecords="showEvents"
-      @dismissModal="dismissEvents"
-    ></EventsView>
+    <EventsView :showRecords="showEvents" @dismissModal="dismissEvents"></EventsView>
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import RecordsView from "./sub/RecordsView";
-import EventsView from "./sub/EventsView"
+import EventsView from "./sub/EventsView";
 export default {
   name: "AIMSHolder",
   components: {
@@ -125,7 +124,6 @@ export default {
       return {
         on: {
           click: (event) => {
-            console.log(event, record);
             this.holderID = record["_id"];
             this.holderName = record["name"];
             this.showRecords = true;
@@ -137,11 +135,11 @@ export default {
       this.showRecords = false;
     },
     toShowEvents: function () {
-      this.showEvents = true
+      this.showEvents = true;
     },
     dismissEvents: function () {
-      this.showEvents = false
-    }
+      this.showEvents = false;
+    },
   },
   mounted() {
     this.fetchHolders();
@@ -151,7 +149,7 @@ export default {
 
 <style>
 .title {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 </style>

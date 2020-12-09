@@ -2,6 +2,7 @@ import Vue from 'vue';
 import App from './App';
 import axios from 'axios';
 import VueRouter from 'vue-router'
+import routes from './routers'
 import {
   Base,
   Table,
@@ -67,6 +68,13 @@ Vue.mixin({
   },
 })
 
+const router = new VueRouter({
+  mode: 'history',
+  routes
+})
+
 new Vue({
+  el: '#app',
   render: h => h(App),
-}).$mount('#app')
+  router
+})
